@@ -1,22 +1,23 @@
-import { BotProvider } from "../BotProvider";
-import { TelegramBotProvider } from "../implementations/TelegramBotProvider";
-import { InMemoryBibleRepository } from "@modules/bible/repositories/implementations/InMemoryBibleRepository";
+import InMemoryBibleRepository from '@modules/bible/repositories/implementations/InMemoryBibleRepository';
 
-import botConfig from '@config/bot'
+import botConfig from '@config/bot';
 
-import { DailyThoughtHandler } from "@infra/telegram/handlers/implementations/DailyThoughtHandler";
-import { VerseHandler } from "@infra/telegram/handlers/implementations/VerseHandler";
-import { makeCacheProvider } from "@infra/providers/cache/factories/CacheProviderFactory";
+import DailyThoughtHandler from '@infra/telegram/handlers/implementations/DailyThoughtHandler';
+import VerseHandler from '@infra/telegram/handlers/implementations/VerseHandler';
+import makeCacheProvider from '@infra/providers/cache/factories/CacheProviderFactory';
+import TelegramBotProvider from '../implementations/TelegramBotProvider';
 
-export function makeBotProvider(): BotProvider | null {
+import { BotProvider } from '../BotProvider';
+
+export default function makeBotProvider(): BotProvider | null {
     const bibleRepository = new InMemoryBibleRepository();
     const cacheProvider = makeCacheProvider();
 
-    if (botConfig.driver == 'telegram') {
+    if (botConfig.driver === 'telegram') {
         return new TelegramBotProvider(
             new DailyThoughtHandler(bibleRepository, cacheProvider),
-            new VerseHandler(bibleRepository)
-        )
+            new VerseHandler(bibleRepository),
+        );
     }
 
     return null;

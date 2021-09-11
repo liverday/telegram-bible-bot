@@ -1,21 +1,28 @@
-import { adaptBibleMessageToFullMessage } from '@infra/adapters/FullBibleMessageAdapter';
+import adaptBibleMessageToFullMessage from '@infra/adapters/FullBibleMessageAdapter';
 import { CacheProvider } from '@infra/providers/cache/CacheProvider';
-import { TelegramHandler }  from '@infra/telegram/handlers/TelegramHandler';
+import { TelegramHandler } from '@infra/telegram/handlers/TelegramHandler';
 import { BibleRepository } from '@modules/bible/repositories/BibleRepository';
 import { format } from 'date-fns';
 import TelegramBot from 'node-telegram-bot-api';
 
-export class DailyThoughtHandler implements TelegramHandler {
+export default class DailyThoughtHandler implements TelegramHandler {
+    private bibleRepository: BibleRepository;
+
+    private cacheProvider: CacheProvider;
+
     constructor(
-        private bibleRepository: BibleRepository,
-        private cacheProvider: CacheProvider
-    ) { }
+        bibleRepository: BibleRepository,
+        cacheProvider: CacheProvider,
+    ) {
+        this.bibleRepository = bibleRepository;
+        this.cacheProvider = cacheProvider;
+    }
 
     async handle(message: TelegramBot.Message): Promise<string> {
-        const { id } = message.chat
+        const { id } = message.chat;
         const currentDate = format(new Date(), 'yyyy-MM-dd');
         const cachePrefix = `thoughts:${id}`;
-        const cacheKey = `${cachePrefix}:${currentDate}`
+        const cacheKey = `${cachePrefix}:${currentDate}`;
 
         const cachedThought = await this.cacheProvider.get<string>(cacheKey);
 
@@ -23,12 +30,14 @@ export class DailyThoughtHandler implements TelegramHandler {
             return cachedThought;
         }
 
-        this.cacheProvider.removeAll(cachePrefix)
+        this.cacheProvider.removeAll(cachePrefix);
 
-        const { verseWithReferenceMessage }= adaptBibleMessageToFullMessage(this.bibleRepository.findDailyThought())
+        const { verseWithReferenceMessage } = adaptBibleMessageToFullMessage(
+            this.bibleRepository.findDailyThought(),
+        );
 
-        this.cacheProvider.put(cacheKey, verseWithReferenceMessage)
+        this.cacheProvider.put(cacheKey, verseWithReferenceMessage);
 
-        return verseWithReferenceMessage!
+        return verseWithReferenceMessage as string;
     }
 }

@@ -1,9 +1,9 @@
-import { RedisOptions } from 'ioredis'
+import { RedisOptions } from 'ioredis';
 
 interface CacheConfig {
     config: {
-        redis: RedisOptions
-    }
+        redis: RedisOptions;
+    };
 }
 
 export default {
@@ -11,7 +11,7 @@ export default {
         redis: {
             host: process.env.REDIS_HOST,
             port: process.env.REDIS_PORT,
-            password: process.env.REDIS_PASSWORD
-        }
-    }
-} as CacheConfig
+            password: process.env.REDIS_PASSWORD,
+        },
+    },
+} as CacheConfig;

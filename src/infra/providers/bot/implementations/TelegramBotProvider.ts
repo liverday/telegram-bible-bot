@@ -1,29 +1,35 @@
-import { BotProvider } from "../BotProvider";
 import TelegramBot from 'node-telegram-bot-api';
 import botConfig from '@config/bot';
-import { TelegramHandler } from "@infra/telegram/handlers/TelegramHandler";
-import { adaptTelegramMessageFromHandler } from "@infra/telegram/adapters/TelegramMessageAdapter";
+import { TelegramHandler } from '@infra/telegram/handlers/TelegramHandler';
+import adaptTelegramMessageFromHandler from '@infra/telegram/adapters/TelegramMessageAdapter';
+import { BotProvider } from '../BotProvider';
 
-export class TelegramBotProvider implements BotProvider {
-    private bot: TelegramBot
+export default class TelegramBotProvider implements BotProvider {
+    private bot: TelegramBot;
 
-    constructor (
+    constructor(
         private dayThoughtHandler: TelegramHandler,
-        private verseHandler: TelegramHandler
+        private verseHandler: TelegramHandler,
     ) {
-        this.bot = new TelegramBot(botConfig.token!)
+        this.bot = new TelegramBot(botConfig.token as string);
     }
-    
+
     receiveMessages(): void {
         this.bot.startPolling({
-            polling: true
-        })
+            polling: true,
+        });
 
         this.startHandlers();
     }
 
     startHandlers(): void {
-        this.bot.onText(/\/daily_thought/, adaptTelegramMessageFromHandler(this.bot, this.dayThoughtHandler))
-        this.bot.onText(/\/verse/, adaptTelegramMessageFromHandler(this.bot, this.verseHandler))
+        this.bot.onText(
+            /\/daily_thought/,
+            adaptTelegramMessageFromHandler(this.bot, this.dayThoughtHandler),
+        );
+        this.bot.onText(
+            /\/verse/,
+            adaptTelegramMessageFromHandler(this.bot, this.verseHandler),
+        );
     }
 }

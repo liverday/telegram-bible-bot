@@ -29,7 +29,8 @@
                 "ts": "never"
             }
         ],
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "no-param-reassign": "off"
     },
     "settings": {
         "import/resolver": {

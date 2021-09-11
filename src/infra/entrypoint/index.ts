@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { makeBotProvider } from "@infra/providers/bot/factories/BotProviderFactory";
+import makeBotProvider from '@infra/providers/bot/factories/BotProviderFactory';
 
 function bootstrap() {
     const botProvider = makeBotProvider();

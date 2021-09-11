@@ -1,24 +1,29 @@
-import { Book } from "@domain/Book";
-import { BibleRepository } from "../BibleRepository";
-import { getRandom } from "@infra/utils/random";
+import { Book } from '@domain/Book';
+import getRandom from '@infra/utils/random';
 
 import bibleData from '@infra/database/data.json';
-import { Reference } from "@domain/Reference";
-import { BibleMessage } from "@domain/BibleMessage";
+import { Reference } from '@domain/Reference';
+import { BibleMessage } from '@domain/BibleMessage';
+import AppError from '@domain/errors/AppError';
+import { BibleRepository } from '../BibleRepository';
 
-const bibleDataAsType = bibleData as Book[]
+export default class InMemoryBibleRepository implements BibleRepository {
+    private parsedBibleData: Book[];
 
-export class InMemoryBibleRepository implements BibleRepository {
+    constructor() {
+        this.parsedBibleData = bibleData as Book[];
+    }
+
     findBooks(): Book[] {
-        return bibleDataAsType;
+        return this.parsedBibleData;
     }
 
     findDailyThought(): BibleMessage {
-        const randomBook = getRandom(bibleDataAsType.length - 1)
-        const book = bibleDataAsType[randomBook]
-        const randomChapter = getRandom(book.chapters.length - 1)
-        const verses = book.chapters[randomChapter]
-        const randomVerse = getRandom(verses.length - 1)
+        const randomBook = getRandom(this.parsedBibleData.length - 1);
+        const book = this.parsedBibleData[randomBook];
+        const randomChapter = getRandom(book.chapters.length - 1);
+        const verses = book.chapters[randomChapter];
+        const randomVerse = getRandom(verses.length - 1);
 
         return {
             reference: {
@@ -26,45 +31,61 @@ export class InMemoryBibleRepository implements BibleRepository {
                 chapter: randomChapter,
                 verse: randomVerse,
             },
-            verseMessage: verses[randomVerse]
-        }
+            verseMessage: verses[randomVerse],
+        };
     }
 
     findMessageByFullReference(reference: Reference): BibleMessage {
-        const book = bibleDataAsType.find(book => {
-            return book.name.toLocaleLowerCase() === reference.book.toLocaleLowerCase() || book.abbrev === reference.book.toLocaleLowerCase()
-        })
+        const book = this.parsedBibleData.find(bookItem => {
+            return (
+                bookItem.name.toLocaleLowerCase() ===
+                    reference.book.toLocaleLowerCase() ||
+                bookItem.abbrev === reference.book.toLocaleLowerCase()
+            );
+        });
 
         if (!book) {
-            throw new Error('Referência não encontrada')
+            throw AppError.notRecognizedError();
         }
 
-        const chapter = book.chapters[reference.chapter - 1]
+        const chapter = book.chapters[reference.chapter - 1];
+
+        if (!chapter) {
+            throw AppError.notRecognizedError();
+        }
+
         let verses: string[] = [];
         if (Array.isArray(reference.verse)) {
-            const [start, end] = reference.verse
-            verses = verses.concat(chapter.slice(start - 1, end))
+            const [start, end] = reference.verse;
+            verses = verses.concat(chapter.slice(start - 1, end));
         } else {
-            verses = [chapter[reference.verse as number]]
+            const verse = chapter[reference.verse as number];
+            if (!verse) throw AppError.notRecognizedError();
+
+            verses = [verse];
         }
 
         return {
             reference: {
                 book: book.name,
                 chapter: reference.chapter,
-                verse: reference.verse
+                verse: reference.verse,
             },
-            verseMessage: verses.map((verse, index) => {
-                let result = ''
+            verseMessage: verses
+                .map((verse, index) => {
+                    let result = '';
 
-                if (Array.isArray(reference.verse)) {
-                    result += `<strong>${reference.verse[0] + index}:</strong> `
-                }
+                    if (Array.isArray(reference.verse)) {
+                        result += `<strong>${
+                            reference.verse[0] + index
+                        }:</strong> `;
+                    }
 
-                result += `${verse}`
+                    result += `${verse}`;
 
-                return result;
-            }).join('\n')
-        }
+                    return result;
+                })
+                .join('\n'),
+        };
     }
 }

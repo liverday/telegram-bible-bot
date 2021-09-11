@@ -1,6 +1,6 @@
-import { CacheProvider } from "../CacheProvider";
-import { RedisProvider } from "../implementations/RedisProvider";
+import { CacheProvider } from '../CacheProvider';
+import RedisProvider from '../implementations/RedisProvider';
 
-export function makeCacheProvider(): CacheProvider {
+export default function makeCacheProvider(): CacheProvider {
     return new RedisProvider();
 }

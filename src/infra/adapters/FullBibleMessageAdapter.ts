@@ -1,18 +1,20 @@
-import { BibleMessage } from "@domain/BibleMessage";
+import { BibleMessage } from '@domain/BibleMessage';
 
-export function adaptBibleMessageToFullMessage(bibleMessage: BibleMessage): BibleMessage {
+export default function adaptBibleMessageToFullMessage(
+    bibleMessage: BibleMessage,
+): BibleMessage {
     const { reference } = bibleMessage;
 
     let verseAsString = '';
 
     if (Array.isArray(reference.verse)) {
-        const [start, end] = reference.verse
-        verseAsString = `${start}-${end}`
+        const [start, end] = reference.verse;
+        verseAsString = `${start}-${end}`;
     } else {
-        verseAsString = reference.verse.toString()
+        verseAsString = reference.verse.toString();
     }
 
-    bibleMessage.verseWithReferenceMessage = `${reference.book} ${reference.chapter}:${verseAsString}\n\n${bibleMessage.verseMessage}`
+    bibleMessage.verseWithReferenceMessage = `${reference.book} ${reference.chapter}:${verseAsString}\n\n${bibleMessage.verseMessage}`;
 
-    return bibleMessage
+    return bibleMessage;
 }
