@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "target": "es2015", 
+        "module": "commonjs", 
+        "allowJs": true,
+        "outDir": "./dist", 
+        "rootDir": "./src", 
+        "moduleResolution": "node",
+        "strict": true, 
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "downlevelIteration": false,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "noFallthroughCasesInSwitch": true,
+        "strictPropertyInitialization": false,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@domain/*": ["./src/domain/*"],
+            "@infra/*": ["./src/infra/*"],
+            "@config/*": ["./src/config/*"],
+            "@modules/*": ["./src/modules/*"]
+        },
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
