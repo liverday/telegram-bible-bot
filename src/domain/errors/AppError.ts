@@ -10,4 +10,10 @@ export default class AppError {
             'Desculpe, não entendi 😩. Envie a referencia completa, separada com espaços, conforme exemplo: Gênesis 4 2',
         );
     }
+
+    static notRecognizedChapterError(): AppError {
+        return new AppError(
+            'Desculpe, não entendi 😩. Envie a referencia completa, separada com espaços, conforme exemplo: Gênesis 4',
+        );
+    }
 }

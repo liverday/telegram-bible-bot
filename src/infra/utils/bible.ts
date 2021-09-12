@@ -1,0 +1,3 @@
+export const OLD_TESTAMENT_CHAPTER_RANGE = [0, 39];
+
+export const NEW_TESTAMENT_CHAPTER_RANGE = [39, 66];
