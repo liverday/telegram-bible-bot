@@ -1,7 +1,8 @@
 import { Book } from '@domain/Book';
 import getRandom from '@infra/utils/random';
 
-import bibleData from '@infra/database/data.json';
+import nviBibleData from '@infra/database/nvi.json';
+
 import { Reference } from '@domain/Reference';
 import { BibleMessage } from '@domain/BibleMessage';
 import AppError from '@domain/errors/AppError';
@@ -11,7 +12,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
     private parsedBibleData: Book[];
 
     constructor() {
-        this.parsedBibleData = bibleData as Book[];
+        this.parsedBibleData = nviBibleData as Book[];
     }
 
     findBooks(): Book[] {
