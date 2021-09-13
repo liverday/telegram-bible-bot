@@ -1,17 +1,17 @@
 import TelegramBot from 'node-telegram-bot-api';
 import botConfig from '@config/bot';
-import { TelegramHandler } from '@infra/telegram/handlers/TelegramHandler';
-import adaptTelegramMessageFromHandler from '@infra/telegram/adapters/TelegramMessageAdapter';
+import MessageHandler from '@domain/MessageHandler';
+import adaptTelegramMessageFromHandler from '@infra/adapters/BibleMessageToTelegramMessageAdapter';
 import { BotProvider } from '../BotProvider';
 
 export default class TelegramBotProvider implements BotProvider {
     private bot: TelegramBot;
 
     constructor(
-        private dayThoughtHandler: TelegramHandler,
-        private verseHandler: TelegramHandler,
-        private booksHandler: TelegramHandler,
-        private chapterHandler: TelegramHandler,
+        private dayThoughtHandler: MessageHandler,
+        private verseHandler: MessageHandler,
+        private booksHandler: MessageHandler,
+        private chapterHandler: MessageHandler,
     ) {
         this.bot = new TelegramBot(botConfig.token as string);
     }
