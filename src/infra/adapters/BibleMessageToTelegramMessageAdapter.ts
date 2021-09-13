@@ -1,10 +1,10 @@
 import AppError from '@domain/errors/AppError';
 import TelegramBot from 'node-telegram-bot-api';
-import { TelegramHandler } from '../handlers/TelegramHandler';
+import MessageHandler from '@domain/MessageHandler';
 
 export default function adaptTelegramMessageFromHandler(
     bot: TelegramBot,
-    handler: TelegramHandler,
+    handler: MessageHandler,
 ): (message: TelegramBot.Message) => void {
     return async (message: TelegramBot.Message) => {
         try {

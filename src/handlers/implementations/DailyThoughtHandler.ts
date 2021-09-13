@@ -1,11 +1,11 @@
-import adaptBibleMessageToFullMessage from '@infra/adapters/FullBibleMessageAdapter';
+import adaptBibleMessageToFullMessage from '@infra/adapters/BibleMessageToFullVerseWithReferenceAdapter';
 import { CacheProvider } from '@infra/providers/cache/CacheProvider';
-import { TelegramHandler } from '@infra/telegram/handlers/TelegramHandler';
+import MessageHandler from '@domain/MessageHandler';
 import { BibleRepository } from '@modules/bible/repositories/BibleRepository';
 import { format } from 'date-fns';
 import TelegramBot from 'node-telegram-bot-api';
 
-export default class DailyThoughtHandler implements TelegramHandler {
+export default class DailyThoughtHandler implements MessageHandler {
     private bibleRepository: BibleRepository;
 
     private cacheProvider: CacheProvider;

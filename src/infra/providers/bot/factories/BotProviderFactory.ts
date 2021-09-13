@@ -2,10 +2,10 @@ import InMemoryBibleRepository from '@modules/bible/repositories/implementations
 
 import botConfig from '@config/bot';
 
-import DailyThoughtHandler from '@infra/telegram/handlers/implementations/DailyThoughtHandler';
-import VerseHandler from '@infra/telegram/handlers/implementations/VerseHandler';
-import BooksHandler from '@infra/telegram/handlers/implementations/BooksHandler';
-import ChapterHandler from '@infra/telegram/handlers/implementations/ChapterHandler';
+import DailyThoughtHandler from 'src/handlers/implementations/DailyThoughtHandler';
+import VerseHandler from 'src/handlers/implementations/VerseHandler';
+import BooksHandler from 'src/handlers/implementations/BooksHandler';
+import ChapterHandler from 'src/handlers/implementations/ChapterHandler';
 
 import makeCacheProvider from '@infra/providers/cache/factories/CacheProviderFactory';
 

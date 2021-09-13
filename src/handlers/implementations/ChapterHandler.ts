@@ -1,10 +1,10 @@
 import AppError from '@domain/errors/AppError';
-import adaptBibleMessageToFullMessage from '@infra/adapters/FullBibleMessageAdapter';
+import adaptBibleMessageToFullMessage from '@infra/adapters/BibleMessageToFullVerseWithReferenceAdapter';
 import { BibleRepository } from '@modules/bible/repositories/BibleRepository';
 import { Message } from 'node-telegram-bot-api';
-import { TelegramHandler } from '../TelegramHandler';
+import MessageHandler from '@domain/MessageHandler';
 
-export default class ChapterHandler implements TelegramHandler {
+export default class ChapterHandler implements MessageHandler {
     private bibleRepository: BibleRepository;
 
     constructor(bibleRepository: BibleRepository) {

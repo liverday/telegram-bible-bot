@@ -4,9 +4,9 @@ import {
 } from '@infra/utils/bible';
 import { BibleRepository } from '@modules/bible/repositories/BibleRepository';
 import { Message } from 'node-telegram-bot-api';
-import { TelegramHandler } from '../TelegramHandler';
+import MessageHandler from '@domain/MessageHandler';
 
-export default class BooksHandler implements TelegramHandler {
+export default class BooksHandler implements MessageHandler {
     private bibleRepository: BibleRepository;
 
     constructor(bibleRepository: BibleRepository) {
