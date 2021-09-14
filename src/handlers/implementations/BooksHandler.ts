@@ -13,7 +13,7 @@ export default class BooksHandler implements MessageHandler {
         this.bibleRepository = bibleRepository;
     }
 
-    async handle(message: Message): Promise<string> {
+    async handle(_: Message): Promise<string> {
         const books = this.bibleRepository.findBooks();
         const [oldTestamentStartSlice, oldTestamentEndSlice] =
             OLD_TESTAMENT_CHAPTER_RANGE;
