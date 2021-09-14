@@ -8,6 +8,12 @@ Você é muito bem-vindo aqui! Queremos que seja fácil e transparente a contrib
 - Propor novas funcionalidades
 - Se tornar um mantenedor do projeto.
 
+## Commits Semânticos
+
+Utilizamos o guia de commit do [Angular](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) para os nossos commits.
+
+E utilizamos o [Commitizen](https://github.com/commitizen/cz-cli) para padronizá-los.
+
 ## Desenvolvemos com Github
 
 Esse github será a fonte de todas as nossas interações. Com código, pessoas ou integrações.

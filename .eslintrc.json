@@ -30,7 +30,8 @@
             }
         ],
         "prettier/prettier": "error",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_"}]
     },
     "settings": {
         "import/resolver": {

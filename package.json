@@ -7,18 +7,24 @@
     "author": "Vitor Medeiro",
     "license": "MIT",
     "devDependencies": {
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
         "@types/ioredis": "^4.27.2",
         "@types/node": "^16.9.1",
         "@types/node-telegram-bot-api": "^0.51.4",
         "@typescript-eslint/eslint-plugin": "^4.31.0",
         "@typescript-eslint/parser": "^4.31.0",
+        "commitizen": "^4.2.4",
         "eslint": "^7.32.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-config-prettier": "^8.3.0",
         "eslint-import-resolver-typescript": "^2.4.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^7.0.2",
+        "jest": "^27.2.0",
         "prettier": "^2.4.0",
+        "ts-jest": "^27.0.5",
         "ts-node": "^10.2.1",
         "ts-node-dev": "^1.1.8",
         "tsconfig-paths": "^3.11.0",
@@ -26,12 +32,22 @@
     },
     "scripts": {
         "start:dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules -- src/infra/entrypoint/index.ts",
-        "start": "ts-node src/infra/entrypoint/index.ts"
+        "start": "ts-node src/infra/entrypoint/index.ts",
+        "lint": "eslint 'src/**' --fix",
+        "test": "jest --passWithNoTests",
+        "prepare": "husky install",
+        "cm": "cz"
     },
     "dependencies": {
+        "cz-conventional-changelog": "^3.3.0",
         "date-fns": "^2.23.0",
         "dotenv": "^10.0.0",
         "ioredis": "^4.27.9",
         "node-telegram-bot-api": "^0.54.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }

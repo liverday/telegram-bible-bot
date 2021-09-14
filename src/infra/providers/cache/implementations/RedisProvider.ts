@@ -24,8 +24,8 @@ export default class RedisProvider implements CacheProvider {
         }
     }
 
-    async put(key: string, data: any): Promise<void> {
-        this.client.set(key, data);
+    async put<T>(key: string, data: T): Promise<void> {
+        this.client.set(key, JSON.stringify(data));
     }
 
     async remove(key: string): Promise<void> {

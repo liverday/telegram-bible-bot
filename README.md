@@ -2,6 +2,7 @@
 
 Esse projeto é um bot no [Telegram](https://telegram.org/) que lê e retorna informações sobre os livros da Bíblia Sagrada.
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ## Sumário
 
 - [Motivação](#motivations)

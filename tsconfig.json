@@ -25,7 +25,7 @@
             "@infra/*": ["./src/infra/*"],
             "@config/*": ["./src/config/*"],
             "@modules/*": ["./src/modules/*"]
-        },
+        }
     },
     "include": [
         "src/**/*"
