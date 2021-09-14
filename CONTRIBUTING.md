@@ -30,3 +30,5 @@ Para enviar novos [Pull Requests](https://docs.github.com/en/github/collaboratin
 - Garanta que o seu [Pull Requests](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) tenha uma [Issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## Reporte bugs utilizando nossas [Issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+
+Nós utilizamos [Issues GitHub](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue) para acompanhar bugs publicos. Reporte bugs abrindo uma nova issue!
