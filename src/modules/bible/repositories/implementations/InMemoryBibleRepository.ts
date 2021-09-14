@@ -6,6 +6,7 @@ import nviBibleData from '@infra/database/nvi.json';
 import { Reference } from '@domain/Reference';
 import { BibleMessage } from '@domain/BibleMessage';
 import AppError from '@domain/errors/AppError';
+import normalize from '@infra/utils/string';
 import { BibleRepository } from '../BibleRepository';
 
 export default class InMemoryBibleRepository implements BibleRepository {
@@ -85,11 +86,12 @@ export default class InMemoryBibleRepository implements BibleRepository {
     }
 
     findBookByNameOrAbbrev(nameOrAbbrev: string): Book | undefined {
+        const normalizedText = normalize(nameOrAbbrev);
         return this.parsedBibleData.find(bookItem => {
+            const normalizedName = normalize(bookItem.name);
             return (
-                bookItem.name.toLocaleLowerCase() ===
-                    nameOrAbbrev.toLocaleLowerCase() ||
-                bookItem.abbrev === nameOrAbbrev.toLocaleLowerCase()
+                normalizedName === normalizedText ||
+                bookItem.abbrev === normalizedText
             );
         });
     }
