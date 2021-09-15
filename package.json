@@ -34,7 +34,7 @@
     },
     "scripts": {
         "start:dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules -- src/infra/entrypoint/index.ts",
-        "start": "ts-node src/infra/entrypoint/index.ts",
+        "start": "ts-node -r tsconfig-paths/register src/infra/entrypoint/index.ts",
         "lint": "eslint 'src/**' --fix",
         "test": "jest --passWithNoTests",
         "prepare": "husky install",
