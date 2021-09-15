@@ -6,6 +6,7 @@ import DailyThoughtHandler from 'src/handlers/implementations/DailyThoughtHandle
 import VerseHandler from 'src/handlers/implementations/VerseHandler';
 import BooksHandler from 'src/handlers/implementations/BooksHandler';
 import ChapterHandler from 'src/handlers/implementations/ChapterHandler';
+import SearchHandler from 'src/handlers/implementations/SearchHandler';
 
 import makeCacheProvider from '@infra/providers/cache/factories/CacheProviderFactory';
 
@@ -23,6 +24,7 @@ export default function makeBotProvider(): BotProvider | null {
             new VerseHandler(bibleRepository),
             new BooksHandler(bibleRepository),
             new ChapterHandler(bibleRepository),
+            new SearchHandler(bibleRepository),
         );
     }
 

@@ -8,4 +8,5 @@ export interface BibleRepository {
     findDailyThought(): BibleMessage;
     findMessageByFullReference(reference: Reference): BibleMessage;
     findVersesByChapterAndBook(book: string, chapter: string): BibleMessage;
+    searchVersesByText(search: string): BibleMessage[];
 }

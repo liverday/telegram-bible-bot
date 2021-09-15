@@ -14,7 +14,7 @@ export default function adaptBibleMessageToFullMessage(
         verseAsString = reference.verse.toString();
     }
 
-    bibleMessage.verseWithReferenceMessage = `${reference.book} ${reference.chapter}:${verseAsString}\n\n${bibleMessage.verseMessage}`;
+    bibleMessage.verseWithReferenceMessage = `${reference.book} ${reference.chapter}:${verseAsString}\n${bibleMessage.verseMessage}`;
 
     return bibleMessage;
 }

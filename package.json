@@ -10,6 +10,8 @@
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
         "@types/ioredis": "^4.27.2",
+        "@types/jest": "^27.0.1",
+        "@types/mocha": "^9.0.0",
         "@types/node": "^16.9.1",
         "@types/node-telegram-bot-api": "^0.51.4",
         "@typescript-eslint/eslint-plugin": "^4.31.0",

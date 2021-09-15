@@ -12,6 +12,7 @@ export default class TelegramBotProvider implements BotProvider {
         private verseHandler: MessageHandler,
         private booksHandler: MessageHandler,
         private chapterHandler: MessageHandler,
+        private searchHandler: MessageHandler,
     ) {
         this.bot = new TelegramBot(botConfig.token as string);
     }
@@ -41,6 +42,11 @@ export default class TelegramBotProvider implements BotProvider {
         this.bot.onText(
             /\/chapter/,
             adaptTelegramMessageFromHandler(this.bot, this.chapterHandler),
+        );
+
+        this.bot.onText(
+            /\/search/,
+            adaptTelegramMessageFromHandler(this.bot, this.searchHandler),
         );
     }
 }

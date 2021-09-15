@@ -145,6 +145,7 @@ Exemplo: `/chapter 1 Corintios 13`
 - **/verse {{referencia_completa_do_versiculo}}**: Retorna o versículo encontrado.  
 Exemplo: `/verse 1 Corintios 13 1`, ou caso queira um intervalo de versículos, utilize traço: `/verse 1 Corintios 13 1-10`
 - **/daily_thought**: Retorna um versículo aleatório para o dia em que a soliticação foi feita. Essa referência só é modificada no dia seguinte.
+- **/search**: Busca uma referência ou uma lista de referências da bíblia por texto. Exemplo: `/search amor é paciente`.
 
 <h2 id="contributing">Guia de contribuição</h2>
 
@@ -153,7 +154,6 @@ Para contribuir com o projeto, veja como [aqui](./CONTRIBUTING.md).
 ## Roadmap
 
 - Automatização de testes
-- Conseguir pesquisar uma citação por texto
 - Crawler de novas versões da bíblia
 - Comando que diga fatos históricos sobre um determinado texto ou livro
 - Curiosidades sobre a bíblia
