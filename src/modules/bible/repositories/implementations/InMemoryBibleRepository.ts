@@ -29,6 +29,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
 
         return {
             reference: {
+                version: 'nvi',
                 book: book.name,
                 chapter: randomChapter + 1,
                 verse: randomVerse + 1,
@@ -63,6 +64,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
 
         return {
             reference: {
+                version: 'nvi',
                 book: book.name,
                 chapter: reference.chapter,
                 verse: reference.verse,
@@ -109,6 +111,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
 
         return {
             reference: {
+                version: 'nvi',
                 book,
                 chapter: chapterAsInt,
                 verse: [1, verses.length],
@@ -136,6 +139,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
                     if (verse.toLowerCase().match(regex)) {
                         result.push({
                             reference: {
+                                version: 'nvi',
                                 book: book.name,
                                 chapter: chapterIndex + 1,
                                 verse: index + 1,

@@ -47,6 +47,7 @@ export default class VerseHandler implements MessageHandler {
         }
 
         const reference: Reference = {
+            version: 'nvi',
             book,
             chapter: parseInt(chapter, 10),
             verse,
