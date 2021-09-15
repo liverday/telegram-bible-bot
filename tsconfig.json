@@ -8,7 +8,6 @@
         "moduleResolution": "node",
         "strict": true, 
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "noEmit": true,
         "downlevelIteration": false,
         "skipLibCheck": true,

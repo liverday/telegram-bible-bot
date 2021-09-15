@@ -124,4 +124,29 @@ export default class InMemoryBibleRepository implements BibleRepository {
                 .join('\n'),
         };
     }
+
+    searchVersesByText(text: string): BibleMessage[] {
+        const result: BibleMessage[] = [];
+        const normalizedText = text.toLowerCase();
+        const regex = new RegExp(`\\b(${normalizedText})\\b`, 'i');
+
+        this.parsedBibleData.forEach(book => {
+            book.chapters.forEach((chapter, chapterIndex) => {
+                chapter.forEach((verse, index) => {
+                    if (verse.toLowerCase().match(regex)) {
+                        result.push({
+                            reference: {
+                                book: book.name,
+                                chapter: chapterIndex + 1,
+                                verse: index + 1,
+                            },
+                            verseMessage: verse,
+                        });
+                    }
+                });
+            });
+        });
+
+        return result;
+    }
 }
