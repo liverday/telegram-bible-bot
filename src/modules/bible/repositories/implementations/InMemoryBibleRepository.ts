@@ -130,13 +130,20 @@ export default class InMemoryBibleRepository implements BibleRepository {
 
     searchVersesByText(text: string): BibleMessage[] {
         const result: BibleMessage[] = [];
-        const normalizedText = text.toLowerCase();
-        const regex = new RegExp(`\\b(${normalizedText})\\b`, 'i');
+        const normalizedText = normalize(text);
+        const normalizedRegex = new RegExp(`\\b(${normalizedText})\\b`, 'i');
 
         this.parsedBibleData.forEach(book => {
             book.chapters.forEach((chapter, chapterIndex) => {
                 chapter.forEach((verse, index) => {
-                    if (verse.toLowerCase().match(regex)) {
+                    const normalizedVerse = normalize(verse);
+                    if (normalizedVerse.toLowerCase().match(normalizedRegex)) {
+                        const newHighlightedVerse = normalizedVerse.replace(
+                            normalizedRegex,
+                            () => {
+                                return `<b>${text}</b>`;
+                            },
+                        );
                         result.push({
                             reference: {
                                 version: 'nvi',
@@ -144,7 +151,7 @@ export default class InMemoryBibleRepository implements BibleRepository {
                                 chapter: chapterIndex + 1,
                                 verse: index + 1,
                             },
-                            verseMessage: verse,
+                            verseMessage: newHighlightedVerse,
                         });
                     }
                 });
