@@ -12,10 +12,12 @@ export default function adaptTelegramMessageFromHandler(
             if (answer.length) {
                 const chunks = answer.match(/([^]{1,4096}\B)/g);
 
-                chunks?.forEach(chunk => {
-                    bot.sendMessage(message.chat.id, chunk, {
-                        parse_mode: 'HTML',
-                    });
+                chunks?.forEach((chunk, index) => {
+                    setTimeout(() => {
+                        bot.sendMessage(message.chat.id, chunk, {
+                            parse_mode: 'HTML',
+                        });
+                    }, index * 200);
                 });
             }
         } catch (err) {
